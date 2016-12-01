@@ -46,7 +46,7 @@ RUN mkdir -p $GOPATH/src/github.com/linkedin/Burrow \
  && gpm install \
  && go install \
  && mv $GOPATH/bin/Burrow $GOPATH/bin/burrow \
- && apk del git curl wget go
+ && apk del git wget go
 
 ADD etc/consul-templates/burrow/burrow.cfg.ctmpl \
     etc/consul-templates/burrow/logging.cfg.ctmpl \

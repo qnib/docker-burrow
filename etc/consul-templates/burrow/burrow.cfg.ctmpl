@@ -3,13 +3,13 @@ logconfig=/etc/burrow/logging.cfg
 group-blacklist=^(console-consumer-|python-kafka-consumer-).*$
 
 [zookeeper]
-hostname=zookeeper
+hostname={{ env "BURROW_ZK_HOST" }}
 port=2181
 timeout=6
 lock-path=/burrow/notifier
 
 [kafka "local"]
-broker=kafka
+broker={{range $i, $e := service "kafka" "any"}}{{if ne $i 0}},{{end}}{{$e.Address}}:{{$e.Port}}{{end}}
 broker-port=9092
 offsets-topic=__consumer_offsets
 zookeeper={{ env "BURROW_ZK_HOST" }}
